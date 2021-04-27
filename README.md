@@ -1,6 +1,6 @@
 # TapUtils
 
-A library contain multiple useful utilities needed for making a spigot plugin, Wiki/API Doc coming soon!
+A library contain multiple useful utilities needed for making a spigot plugin.
 
 ## How to use
 
