@@ -25,3 +25,5 @@ This library is **NOT** a plugin. To use it, please read below:
     </dependency>
 </dependencies>
 ```
+## Wiki
+https://github.com/Chanakan55991/TapUtils/wiki
