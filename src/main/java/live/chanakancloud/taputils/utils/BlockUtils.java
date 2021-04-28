@@ -1,7 +1,6 @@
 package live.chanakancloud.taputils.utils;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockUtils {
-    public static float getFriction(Material material) {
+    public static float getFriction(XMaterial material) {
         switch(material) {
             case SLIME_BLOCK:
                 return 0.8f;
