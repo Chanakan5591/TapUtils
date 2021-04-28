@@ -45,7 +45,7 @@ public class BlockUtils {
         return null;
     }
 
-    public List<Block> getBlockInRadius(Player player, int radius) {
+    public static List<Block> getBlockInRadius(Player player, int radius) {
         List<Block> blocks = new ArrayList<>();
         Block block = player.getLocation().getBlock();
 
@@ -59,7 +59,7 @@ public class BlockUtils {
         return blocks;
     }
 
-    public List<Block> getBlockInRadius(Block block, int radius) {
+    public static List<Block> getBlockInRadius(Block block, int radius) {
         List<Block> blocks = new ArrayList<>();
 
         for (int x = -(radius); x <= radius; x++) {
