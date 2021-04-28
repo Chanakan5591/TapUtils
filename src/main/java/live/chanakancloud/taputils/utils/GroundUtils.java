@@ -19,18 +19,6 @@ public class GroundUtils {
         return distance;
     }
 
-    public static Block getBlockFromGround(Player e){
-        Location loc = e.getLocation().clone();
-        double y = loc.getBlockY();
-        for (double i = y; i >= 0; i--){
-            loc.setY(i);
-            if(loc.getBlock().getType().isSolid()) {
-                return loc.getBlock();
-            }
-        }
-        return null;
-    }
-
     public static boolean isNearGround(Location location) {
         double expand = 0.3;
         for (double x = -expand; x <= expand; x += expand) {
