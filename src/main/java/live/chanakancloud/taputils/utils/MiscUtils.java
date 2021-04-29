@@ -21,6 +21,10 @@ public class MiscUtils {
         toConsole(Bukkit.getConsoleSender(), TapUtils.getPrefixColor() + "[" + TapUtils.getPluginName() + "] " + ChatColor.WHITE + message);
     }
 
+    public static void log(String message) {
+        sendToConsole(message);
+    }
+
     public static void sendToPlayer(Player player, String message) {
         player.sendMessage(colorize(TapUtils.getPrefixColor() + "[" + TapUtils.getPluginName() + "] " + ChatColor.WHITE + message));
     }
@@ -51,5 +55,13 @@ public class MiscUtils {
         itemStack.setItemMeta(itemMeta);
         return itemStack;
     }
+
+    public static <T> List<T> combine(List<T> first, List<T> second) {
+        first.addAll(second);
+
+        return first;
+    }
+
+
 
 }
