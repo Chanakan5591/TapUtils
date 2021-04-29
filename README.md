@@ -1,4 +1,4 @@
-# TapUtils - Unstable branch
+# TapUtils
 
 A library contain multiple useful utilities needed for making a spigot plugin.
 
