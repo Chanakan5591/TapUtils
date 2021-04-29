@@ -1,4 +1,4 @@
-# TapUtils
+# TapUtils - Unstable branch
 
 A library contain multiple useful utilities needed for making a spigot plugin.
 
@@ -21,7 +21,11 @@ This library is **NOT** a plugin. To use it, please read below:
     <dependency>
         <groupId>live.chanakancloud</groupId>
         <artifactId>taputils</artifactId>
+<<<<<<< HEAD
         <version>1.1.1</version>
+=======
+        <version>1.1.2-SNAPSHOT</version>
+>>>>>>> 6d15f915e1e44e89173a1452395665d36c0ff6a9
     </dependency>
 </dependencies>
 ```
