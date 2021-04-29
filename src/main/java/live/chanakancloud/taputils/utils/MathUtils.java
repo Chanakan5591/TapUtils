@@ -61,6 +61,37 @@ public class MathUtils {
         return hypot(one.getX() - two.getX(), one.getY() - two.getY(), one.getZ() - two.getZ());
     }
 
+    public static float sqrt_float(float value) {
+        return (float) Math.sqrt((double) value);
+    }
+
+    public static float sqrt_double(double value) {
+        return (float) Math.sqrt(value);
+    }
+
+    public static int floor_float(float value) {
+        int i = (int) value;
+        return value < (float) i ? i - 1 : i;
+    }
+
+    public static float abs(float value) {
+        return value >= 0.0F ? value : -value;
+    }
+
+    public static int abs_int(int value) {
+        return value >= 0 ? value : -value;
+    }
+
+    public static double average(long[] values) {
+        long i = 0L;
+
+        for (long j : values) {
+            i += j;
+        }
+
+        return (double) i / (double) values.length;
+    }
+
     public static boolean playerMoved(Vector from, Vector to) {
         return from.distance(to) > 0;
     }
