@@ -1,4 +1,4 @@
-package live.chanakancloud.taputils.utils;
+package live.chanakancloud.taputils.math;
 
 import org.bukkit.Location;
 import org.bukkit.util.Vector;
