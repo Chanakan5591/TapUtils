@@ -164,15 +164,6 @@ public class MathUtils {
      * @param value float value to floor
      * @return int
      */
-
-    public static float sqrt_float(float value) {
-        return (float) Math.sqrt((double) value);
-    }
-
-    public static float sqrt_double(double value) {
-        return (float) Math.sqrt(value);
-    }
-
     public static int floor_float(float value) {
         int i = (int) value;
         return value < (float) i ? i - 1 : i;
