@@ -21,9 +21,12 @@ This library is **NOT** a plugin. To use it, please read below:
     <dependency>
         <groupId>live.chanakancloud</groupId>
         <artifactId>taputils</artifactId>
-        <version>1.1.2</version>
+        <version>1.1.3</version>
     </dependency>
 </dependencies>
 ```
 ## Wiki
-https://github.com/Chanakan55991/TapUtils/wiki
+Moved to JavaDoc
+
+## JavaDoc 
+https://chanakan55991.github.io/
