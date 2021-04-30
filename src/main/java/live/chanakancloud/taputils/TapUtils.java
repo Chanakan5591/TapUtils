@@ -12,11 +12,8 @@ import org.bukkit.plugin.java.JavaPlugin;
  * @since 1.0.0
  */
 public class TapUtils {
-    /** The Plugin instance should be set here */
     @Getter @Setter private static JavaPlugin plugin;
-    /** To set ChatColor */
     @Getter @Setter private static ChatColor prefixColor;
-    /** Plugin Name, Will be use as prefix also */
     @Getter @Setter private static String pluginName;
 
 }
