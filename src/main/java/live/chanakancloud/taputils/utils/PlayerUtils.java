@@ -34,6 +34,7 @@ public class PlayerUtils {
      * @param to Location to
      * @return boolean
      */
+  
     public static boolean isAscending(Location from, Location to) {
         return to.getY() > from.getY();
     }
@@ -44,6 +45,7 @@ public class PlayerUtils {
      * @param to Location to
      * @return boolean
      */
+
     public static boolean isDescending(Location from, Location to) {
         return !isAscending(from, to);
     }
@@ -53,6 +55,7 @@ public class PlayerUtils {
      * @param uuid UUID of the player to get
      * @return Player
      */
+
     public static Player getPlayer(UUID uuid) {
         return TapUtils.getPlugin().getServer().getPlayer(uuid);
     }
@@ -62,6 +65,7 @@ public class PlayerUtils {
      * @param uuid the uuid of the player
      * @return boolean
      */
+
     public static boolean isPlayerOnline(UUID uuid) {
         for (Player onlinePlayer : TapUtils.getPlugin().getServer().getOnlinePlayers()) {
             if(onlinePlayer.getUniqueId().equals(uuid)) return true;
@@ -74,6 +78,7 @@ public class PlayerUtils {
      * @param name the string of player name
      * @return Player
      */
+
     public static Player getPlayerByName(String name) {
         return TapUtils.getPlugin().getServer().getPlayerExact(name);
     }

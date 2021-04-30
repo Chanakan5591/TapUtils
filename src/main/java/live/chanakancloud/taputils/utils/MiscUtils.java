@@ -30,6 +30,7 @@ public class MiscUtils {
      *
      * @param message the message to be log (will implement log level in future releases)
      */
+
     public static void log(String message) {
         sendToConsole(message);
     }
@@ -39,6 +40,7 @@ public class MiscUtils {
      * @param player the player for message to be send
      * @param message the message to be send to the player
      */
+
     public static void sendToPlayer(Player player, String message) {
         player.sendMessage(colorize(TapUtils.getPrefixColor() + "[" + TapUtils.getPluginName() + "] " + ChatColor.WHITE + message));
     }
@@ -78,7 +80,5 @@ public class MiscUtils {
 
         return first;
     }
-
-
 
 }

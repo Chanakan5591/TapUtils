@@ -39,6 +39,7 @@ public class MathUtils {
         }
     }
 
+
     /** Calculate chanceOf with percent as input
      * @param percent the number as percentage
      * @return boolean
@@ -79,33 +80,40 @@ public class MathUtils {
      * @param rad radius to calculate in float
      * @return float
      */
+
     public static float sin(float rad) {
         return sin[(int) (rad * radToIndex) & SIN_MASK];
     }
+
 
     /** A more efficient sin function
      *
      * @param rad radius to calculate in double
      * @return double
      */
+
     public static double sin(double rad) {
         return sin[(int) (rad * radToIndex) & SIN_MASK];
     }
+
 
     /** A more efficient cos function
      *
      * @param rad radius to calculate in float
      * @return float
      */
+
     public static float cos(float rad) {
         return cos[(int) (rad * radToIndex) & SIN_MASK];
     }
+
 
     /** A more efficient cos function
      *
      * @param rad radius to calculate in double
      * @return double
      */
+
     public static double cos(double rad) {
         return cos[(int) (rad * radToIndex) & SIN_MASK];
     }
@@ -116,6 +124,7 @@ public class MathUtils {
      * @param toY Y Location to
      * @return double
      */
+
     public static double calculateDeltaY(double fromY, double toY) {
         return toY - fromY;
     }
@@ -126,9 +135,11 @@ public class MathUtils {
      * @param two Second Vector
      * @return double
      */
+
     public static double get3DDistance(Vector one, Vector two) {
         return hypot(one.getX() - two.getX(), one.getY() - two.getY(), one.getZ() - two.getZ());
     }
+
 
     /** A square root function for float using more efficient sqrt function
      *
@@ -153,6 +164,15 @@ public class MathUtils {
      * @param value float value to floor
      * @return int
      */
+
+    public static float sqrt_float(float value) {
+        return (float) Math.sqrt((double) value);
+    }
+
+    public static float sqrt_double(double value) {
+        return (float) Math.sqrt(value);
+    }
+
     public static int floor_float(float value) {
         int i = (int) value;
         return value < (float) i ? i - 1 : i;
@@ -166,21 +186,24 @@ public class MathUtils {
     public static float abs(float value) {
         return value >= 0.0F ? value : -value;
     }
-
+  
     /** calculate absolute value of int
      *
      * @param value int value to calculate
      * @return int
      */
+
     public static int abs_int(int value) {
         return value >= 0 ? value : -value;
     }
+
 
     /** an average function
      *
      * @param values long[] value to average
      * @return double
      */
+
     public static double average(long[] values) {
         long i = 0L;
 
@@ -201,6 +224,7 @@ public class MathUtils {
         return from.distance(to) > 0;
     }
 
+
     /** Check if player have looked
      *
      * @param from Vector from
@@ -216,6 +240,7 @@ public class MathUtils {
      * @param value double... value to hypot
      * @return double
      */
+  
     public static double hypot(double... value) {
         double total = 0;
 
@@ -231,6 +256,7 @@ public class MathUtils {
      * @param value double... value to hypot
      * @return float
      */
+
     public static float hypot(float... value) {
         float total = 0;
 
@@ -241,11 +267,13 @@ public class MathUtils {
         return (float) Math.sqrt(total);
     }
 
+
     /** calculate greatest common divisor using euclidean
      *
      * @param input long... value to gcd
      * @return long
      */
+
     public static long gcd(long... input)
     {
         long result = input[0];
@@ -258,6 +286,7 @@ public class MathUtils {
      * @param num double value to sqrt
      * @return double
      */
+
     public static double sqrt(double num) {
         if(num == 0) return 0;
         double t;
@@ -271,12 +300,14 @@ public class MathUtils {
         return squareRoot;
     }
 
+
     /** get direction from yaw and pitch
      *
      * @param yaw double value of yaw
      * @param pitch double value of pitch
      * @return Vector
      */
+
     public static Vector getDirection(double yaw, double pitch) {
         Vector vector = new Vector();
         vector.setY(-sin(Math.toRadians(pitch)));
@@ -291,6 +322,7 @@ public class MathUtils {
      * @param number float value to calculate sqrt
      * @return float
      */
+
     public static float sqrt(float number) {
         if(number == 0) return 0;
         float t;
@@ -304,13 +336,14 @@ public class MathUtils {
 
         return squareRoot;
     }
-
+  
     /** least common multiple computation in long
      *
      * @param a long first value
      * @param b long second value
      * @return long
      */
+
     public static long lcm(long a, long b)
     {
         return a * (b / gcd(a, b));
@@ -321,6 +354,7 @@ public class MathUtils {
      * @param array int []array value to calculate mode
      * @return int
      */
+
     public static int mode(int []array)
     {
         HashMap<Integer,Integer> hashMap = new HashMap<Integer,Integer>();
@@ -356,11 +390,13 @@ public class MathUtils {
         return sqrt(deltaX * deltaX + deltaZ * deltaZ);
     }
 
+
     /** lcm calculation with long...
      *
      * @param input long... value to calculate
      * @return long
      */
+
     public static long lcm(long... input)
     {
         long result = input[0];
