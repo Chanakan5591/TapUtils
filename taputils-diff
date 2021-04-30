@@ -1,0 +1,388 @@
+diff --git a/.gitignore b/.gitignore
+index 7840ab8..48887c2 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -69,6 +69,7 @@ fabric.properties
+ 
+ # Android studio 3.1+ serialized cache file
+ .idea/caches/build_file_checksums.ser
++.idea/
+ 
+ target/
+ pom.xml.tag
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+index 6dfa7ca..f78add5 100644
+--- a/.idea/compiler.xml
++++ b/.idea/compiler.xml
+@@ -1,7 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <option name="DEFAULT_COMPILER" value="Eclipse" />
+     <annotationProcessing>
+       <profile name="Maven default annotation processors profile" enabled="true">
+         <sourceOutputDir name="target/generated-sources/annotations" />
+diff --git a/README.md b/README.md
+index f4692c8..894350b 100644
+--- a/README.md
++++ b/README.md
+@@ -21,7 +21,7 @@ This library is **NOT** a plugin. To use it, please read below:
+     <dependency>
+         <groupId>live.chanakancloud</groupId>
+         <artifactId>taputils</artifactId>
+-        <version>1.1.1</version>
++        <version>1.1.2-SNAPSHOT</version>
+     </dependency>
+ </dependencies>
+ ```
+diff --git a/pom.xml b/pom.xml
+index 5574090..9c96bda 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -6,7 +6,7 @@
+ 
+     <groupId>live.chanakancloud</groupId>
+     <artifactId>taputils</artifactId>
+-    <version>1.1.1</version>
++    <version>1.1.2-SNAPSHOT</version>
+ 
+     <properties>
+         <maven.compiler.source>1.8</maven.compiler.source>
+diff --git a/src/main/java/live/chanakancloud/taputils/math/MathHelper.java b/src/main/java/live/chanakancloud/taputils/math/MathHelper.java
+new file mode 100644
+index 0000000..134a055
+--- /dev/null
++++ b/src/main/java/live/chanakancloud/taputils/math/MathHelper.java
+@@ -0,0 +1,10 @@
++package live.chanakancloud.taputils.math;
++
++import lombok.Getter;
++
++//EXPERIMENTAL. MAY NOT BE ACCURATE
++public class MathHelper {
++    @Getter private static final double GRAVITY_FRICTION = 0.9800000190734863D;
++    @Getter private static final double WORLD_GRAVITY = 0.08D;
++    @Getter private static final double TERMINAL_VELOCITY = 3.92D;
++}
+diff --git a/src/main/java/live/chanakancloud/taputils/utils/MathUtils.java b/src/main/java/live/chanakancloud/taputils/math/MathUtils.java
+similarity index 86%
+rename from src/main/java/live/chanakancloud/taputils/utils/MathUtils.java
+rename to src/main/java/live/chanakancloud/taputils/math/MathUtils.java
+index 8bcf3ea..0a98ff9 100644
+--- a/src/main/java/live/chanakancloud/taputils/utils/MathUtils.java
++++ b/src/main/java/live/chanakancloud/taputils/math/MathUtils.java
+@@ -1,4 +1,4 @@
+-package live.chanakancloud.taputils.utils;
++package live.chanakancloud.taputils.math;
+ 
+ import org.bukkit.Location;
+ import org.bukkit.util.Vector;
+@@ -61,6 +61,37 @@ public class MathUtils {
+         return hypot(one.getX() - two.getX(), one.getY() - two.getY(), one.getZ() - two.getZ());
+     }
+ 
++    public static float sqrt_float(float value) {
++        return (float) Math.sqrt((double) value);
++    }
++
++    public static float sqrt_double(double value) {
++        return (float) Math.sqrt(value);
++    }
++
++    public static int floor_float(float value) {
++        int i = (int) value;
++        return value < (float) i ? i - 1 : i;
++    }
++
++    public static float abs(float value) {
++        return value >= 0.0F ? value : -value;
++    }
++
++    public static int abs_int(int value) {
++        return value >= 0 ? value : -value;
++    }
++
++    public static double average(long[] values) {
++        long i = 0L;
++
++        for (long j : values) {
++            i += j;
++        }
++
++        return (double) i / (double) values.length;
++    }
++
+     public static boolean playerMoved(Vector from, Vector to) {
+         return from.distance(to) > 0;
+     }
+diff --git a/src/main/java/live/chanakancloud/taputils/utils/MiscUtils.java b/src/main/java/live/chanakancloud/taputils/utils/MiscUtils.java
+index e62023a..6168d23 100644
+--- a/src/main/java/live/chanakancloud/taputils/utils/MiscUtils.java
++++ b/src/main/java/live/chanakancloud/taputils/utils/MiscUtils.java
+@@ -21,6 +21,10 @@ public class MiscUtils {
+         toConsole(Bukkit.getConsoleSender(), TapUtils.getPrefixColor() + "[" + TapUtils.getPluginName() + "] " + ChatColor.WHITE + message);
+     }
+ 
++    public static void log(String message) {
++        sendToConsole(message);
++    }
++
+     public static void sendToPlayer(Player player, String message) {
+         player.sendMessage(colorize(TapUtils.getPrefixColor() + "[" + TapUtils.getPluginName() + "] " + ChatColor.WHITE + message));
+     }
+@@ -52,4 +56,12 @@ public class MiscUtils {
+         return itemStack;
+     }
+ 
++    public static <T> List<T> combine(List<T> first, List<T> second) {
++        first.addAll(second);
++
++        return first;
++    }
++
++
++
+ }
+diff --git a/src/main/java/live/chanakancloud/taputils/utils/PlayerUtils.java b/src/main/java/live/chanakancloud/taputils/utils/PlayerUtils.java
+index db5a1a2..5e55a79 100644
+--- a/src/main/java/live/chanakancloud/taputils/utils/PlayerUtils.java
++++ b/src/main/java/live/chanakancloud/taputils/utils/PlayerUtils.java
+@@ -1,8 +1,13 @@
+ package live.chanakancloud.taputils.utils;
+ 
++import live.chanakancloud.taputils.TapUtils;
++import org.bukkit.Bukkit;
++import org.bukkit.Location;
+ import org.bukkit.block.BlockFace;
+ import org.bukkit.entity.Player;
+ 
++import java.util.UUID;
++
+ public class PlayerUtils {
+     public static boolean isNearWater(Player player) {
+         return player.getLocation().getBlock().isLiquid()
+@@ -18,6 +23,26 @@ public class PlayerUtils {
+                 || player.getLocation().getBlock().getRelative(BlockFace.SOUTH_WEST).isLiquid();
+     }
+ 
++    public static boolean isAscending(Location from, Location to) {
++        return to.getY() > from.getY();
++    }
++
++    public static boolean isDescending(Location from, Location to) {
++        return !isAscending(from, to);
++    }
++
++    public static Player getPlayer(UUID uuid) {
++        return TapUtils.getPlugin().getServer().getPlayer(uuid);
++    }
+ 
++    public static boolean isPlayerOnline(UUID uuid) {
++        for (Player onlinePlayer : TapUtils.getPlugin().getServer().getOnlinePlayers()) {
++            if(onlinePlayer.getUniqueId().equals(uuid)) return true;
++        }
++        return false;
++    }
+ 
++    public static Player getPlayerByName(String name) {
++        return TapUtils.getPlugin().getServer().getPlayerExact(name);
++    }
+ }
+diff --git a/src/main/java/live/chanakancloud/taputils/utils/ReflectionUtils.java b/src/main/java/live/chanakancloud/taputils/utils/ReflectionUtils.java
+new file mode 100644
+index 0000000..d6fd064
+--- /dev/null
++++ b/src/main/java/live/chanakancloud/taputils/utils/ReflectionUtils.java
+@@ -0,0 +1,191 @@
++package live.chanakancloud.taputils.utils;
++
++import java.lang.reflect.Constructor;
++import java.lang.reflect.Field;
++import java.lang.reflect.Method;
++
++/**
++ * A collection of Reflection Methods that return null rather than throwing
++ * Exceptions for cleaner code
++ *
++ * @author Florian
++ *
++ */
++public class ReflectionUtils {
++
++    public static Object constructObject(Constructor<?> constructor, Object... args) {
++        try {
++            return constructor.newInstance(args);
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public static Class<?> getClassForName(String name) {
++        try {
++            return Class.forName(name.replaceAll("/", "."));
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public static Object getFieldValue(Field field, Object object) {
++        try {
++            boolean a = !field.isAccessible();
++            if (a) {
++                field.setAccessible(true);
++            }
++            Object fieldValue = field.get(object);
++            if (a) {
++                field.setAccessible(false);
++            }
++            return fieldValue;
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public static Object invokeMethod(Method method, Object object, Object... args) {
++        try {
++            boolean a = !method.isAccessible();
++            if (!method.isAccessible()) {
++                method.setAccessible(true);
++            }
++            Object obj = method.invoke(object, args);
++            if (a) {
++                method.setAccessible(false);
++            }
++            return obj;
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public static int removeModifier(Object fieldOrMethod, int modifierToRemove) {
++        if (!(fieldOrMethod instanceof Field) || !(fieldOrMethod instanceof Method)) {
++            return -1;
++        }
++
++        ReflectionUtils reflect = new ReflectionUtils(fieldOrMethod, fieldOrMethod.getClass());
++        Field mods = reflect.getFieldDeclared("modifiers");
++        int oldMods = (int) getFieldValue(mods, fieldOrMethod);
++        int newMods = oldMods & ~modifierToRemove;
++        setField(mods, fieldOrMethod, newMods);
++        return oldMods;
++    }
++
++    /**
++     * Sets the value of the specified {@code Field}
++     *
++     * @param field    The field who's value should be changed
++     * @param object   object from which the represented field's value is to be
++     *                 extracted
++     * @param newValue the new value for the field of {@code object} being modified
++     * @return The old value of this Field
++     */
++    public static Object setField(Field field, Object object, Object newValue) {
++        try {
++            boolean a = !field.isAccessible();
++            if (a) {
++                field.setAccessible(true);
++            }
++            Object oldValue = field.get(object);
++            field.set(object, newValue);
++            if (a) {
++                field.setAccessible(false);
++            }
++            return oldValue;
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    /**
++     * Sets the modifiers of the specified Field or Method
++     *
++     * @param fieldOrMethod The object that represents the Field / Method
++     * @param newMods       the new modifiers
++     * @return the old modifiers
++     */
++    public static int setModifiers(Object fieldOrMethod, int newMods) {
++        if (!(fieldOrMethod instanceof Field) || !(fieldOrMethod instanceof Method)) {
++            return -1;
++        }
++
++        ReflectionUtils reflect = new ReflectionUtils(fieldOrMethod, fieldOrMethod.getClass());
++        Field mods = reflect.getFieldDeclared("modifiers");
++        int oldMods = (int) getFieldValue(mods, fieldOrMethod);
++        setField(mods, fieldOrMethod, newMods);
++        return oldMods;
++    }
++
++    private Object object;
++
++    private Class<?> clazz;
++
++    public ReflectionUtils(Object object, Class<?> clazz) {
++        if (clazz == null) {
++            throw new IllegalArgumentException("The specified class may not be null");
++        }
++        this.clazz = clazz;
++        this.object = object;
++    }
++
++    public Class<?> getClazz() {
++        return clazz;
++    }
++
++    public Constructor<?> getConstructor(Class<?>... params) {
++        try {
++            return clazz.getConstructor(params);
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public Field getFieldDeclared(String name) {
++        try {
++            return getClazz().getDeclaredField(name);
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public Method getMethodDeclared(String name, Class<?>... params) {
++        try {
++            return getClazz().getDeclaredMethod(name, params);
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public Object getObject() {
++        return object;
++    }
++
++    public Field getSuperClassField(String name) {
++        try {
++            return getClazz().getSuperclass().getDeclaredField(name);
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++
++    public Method getSuperClassMethod(String name, Class<?>... params) {
++        try {
++            return getClazz().getSuperclass().getDeclaredMethod(name, params);
++        } catch (Exception e) {
++            e.printStackTrace();
++            return null;
++        }
++    }
++}
+\ No newline at end of file

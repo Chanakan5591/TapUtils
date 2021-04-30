@@ -26,4 +26,7 @@ This library is **NOT** a plugin. To use it, please read below:
 </dependencies>
 ```
 ## Wiki
-https://github.com/Chanakan55991/TapUtils/wiki
+Moved to JavaDoc
+
+## JavaDoc 
+https://chanakan55991.github.io/

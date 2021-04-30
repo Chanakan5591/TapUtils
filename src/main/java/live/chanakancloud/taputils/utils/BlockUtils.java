@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BlockUtils {
+    /** to get friction of all ice blocks
+     *
+     * @param material the Material to be check
+     * @return float
+     */
     public static float getFriction(XMaterial material) {
         switch(material) {
             case SLIME_BLOCK:
@@ -23,6 +28,11 @@ public class BlockUtils {
         }
     }
 
+    /** get the blocks at the top of player
+     *
+     * @param player the player to be check
+     * @return Block, null if not exist after 256 blocks checking
+     */
     public static Block getTopBlock(Player player) {
         Location loc = player.getLocation().clone();
         double y = loc.getBlockY();
@@ -34,6 +44,11 @@ public class BlockUtils {
         return null;
     }
 
+    /** get the blocks at the top of another block
+     *
+     * @param block the block to be check
+     * @return Block, null if not exist after 256 blocks checking
+     */
     public static Block getTopBlock(Block block) {
         Location loc = block.getLocation().clone();
         double y = loc.getBlockY();
@@ -45,6 +60,12 @@ public class BlockUtils {
         return null;
     }
 
+    /** get block around player within radius
+     *
+     * @param player the player to be check
+     * @param radius radius of blocks be scan.
+     * @return List<Block>
+     */
     public static List<Block> getBlockInRadius(Player player, int radius) {
         List<Block> blocks = new ArrayList<>();
         Block block = player.getLocation().getBlock();
@@ -59,6 +80,12 @@ public class BlockUtils {
         return blocks;
     }
 
+    /** get block around block within radius
+     *
+     * @param block the block to be check
+     * @param radius radius of blocks be scan.
+     * @return List<Block>
+     */
     public static List<Block> getBlockInRadius(Block block, int radius) {
         List<Block> blocks = new ArrayList<>();
 
@@ -72,6 +99,11 @@ public class BlockUtils {
         return blocks;
     }
 
+    /** get the block at the ground of player
+     *
+     * @param player the player to be check
+     * @return Block, null if none
+     */
     public static Block getBlockFromGround(Player player) {
         Location loc = player.getLocation().clone();
         double y = loc.getBlockY();
@@ -83,7 +115,12 @@ public class BlockUtils {
         }
         return null;
     }
-    
+
+    /** get the block at the ground of another block
+     *
+     * @param block the block to be check
+     * @return Block, null if none
+     */
     public static Block getBlockFromGround(Block block) {
         Location loc = block.getLocation().clone();
         double y = loc.getBlockY();
