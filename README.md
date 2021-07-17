@@ -13,7 +13,7 @@ This library is **NOT** a plugin. To use it, please read below:
 <repositories>
         <repository>
             <id>chanakan-releases</id>
-            <url>https://nexus.chanakancloud.live/repository/maven-releases/</url>
+            <url>https://nexus.chanakancloud.net/repository/maven-releases/</url>
         </repository>
 </repositories>
 
