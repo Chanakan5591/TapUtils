@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 /** Main Class To initialize the library
  * @author Chanakan Mungtin
- * @version 1.1.2
+ * @version 1.2.1
  * @since 1.0.0
  */
 public class TapUtils {

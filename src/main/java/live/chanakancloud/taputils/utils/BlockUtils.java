@@ -88,15 +88,19 @@ public class BlockUtils {
      *
      * @param block  the block to be check
      * @param radius radius of blocks be scan.
+     * @param withAir if to include AIR block into the search.
      * @return List<Block>
      */
-    public static List<Block> getBlockInRadius(Block block, int radius) {
+    public static List<Block> getBlockInRadius(Block block, int radius, boolean withAir) {
         List<Block> blocks = new ArrayList<>();
 
         for (int x = -(radius); x <= radius; x++) {
             for (int y = -(radius); y <= radius; y++) {
                 for (int z = -(radius); z <= radius; z++) {
-                    blocks.add(block.getRelative(x, y, z));
+                    if(!withAir && block.getRelative(x, y ,z).getType() != Material.AIR)
+                        blocks.add(block.getRelative(x, y, z));
+                    else if(withAir)
+                        blocks.add(block.getRelative(x, y, z));
                 }
             }
         }
